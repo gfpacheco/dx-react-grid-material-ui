@@ -1,6 +1,6 @@
 /**
  * Bundle of @devexpress/dx-react-grid-material-ui
- * Generated: 2017-08-21
+ * Generated: 2017-08-29
  * Version: 1.0.0-alpha.8
  * License: https://js.devexpress.com/Licensing
  */
@@ -25,7 +25,7 @@ var _devexpress_dxGridCore = require('@devexpress/dx-grid-core');
 var _devexpress_dxReactCore = require('@devexpress/dx-react-core');
 var List = _interopDefault(require('material-ui-icons/List'));
 
-var styleSheet = materialUi_styles.createStyleSheet('GridLayout', function (theme) {
+var styles = function styles(theme) {
   return {
     headingPanel: {
       paddingLeft: '12px',
@@ -37,7 +37,7 @@ var styleSheet = materialUi_styles.createStyleSheet('GridLayout', function (them
       padding: '12px'
     }
   };
-});
+};
 
 var Root = function Root(_ref) {
   var headerTemplate = _ref.headerTemplate,
@@ -77,7 +77,7 @@ HeaderBase.defaultProps = {
   children: null
 };
 
-var Header = materialUi_styles.withStyles(styleSheet)(HeaderBase);
+var Header = materialUi_styles.withStyles(styles, { name: 'GridLayout' })(HeaderBase);
 
 var FooterBase = function FooterBase(_ref3) {
   var children = _ref3.children,
@@ -98,7 +98,7 @@ FooterBase.defaultProps = {
   children: null
 };
 
-var Footer = materialUi_styles.withStyles(styleSheet)(FooterBase);
+var Footer = materialUi_styles.withStyles(styles, { name: 'GridLayout' })(FooterBase);
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -231,7 +231,7 @@ Grid$1.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired
 };
 
-var styleSheet$1 = materialUi_styles.createStyleSheet('DragDrop', function (theme) {
+var styles$1 = function styles(theme) {
   return {
     container: {
       cursor: 'move',
@@ -249,7 +249,7 @@ var styleSheet$1 = materialUi_styles.createStyleSheet('DragDrop', function (them
       float: 'right'
     }
   };
-});
+};
 
 var ContainerBase = function ContainerBase(_ref) {
   var clientOffset = _ref.clientOffset,
@@ -280,7 +280,7 @@ ContainerBase.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-var Container = materialUi_styles.withStyles(styleSheet$1)(ContainerBase);
+var Container = materialUi_styles.withStyles(styles$1, { name: 'DragDrop' })(ContainerBase);
 
 var ColumnBase = function ColumnBase(_ref2) {
   var column = _ref2.column,
@@ -301,7 +301,7 @@ ColumnBase.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-var Column = materialUi_styles.withStyles(styleSheet$1)(ColumnBase);
+var Column = materialUi_styles.withStyles(styles$1, { name: 'DragDrop' })(ColumnBase);
 
 var containerTemplate = function containerTemplate(props) {
   return React.createElement(Container, props);
@@ -317,7 +317,7 @@ var DragDropContext$1 = function DragDropContext$$1(props) {
   }, props));
 };
 
-var styleSheet$4 = materialUi_styles.createStyleSheet('DropDownMenu', function (theme) {
+var styles$4 = function styles(theme) {
   return {
     button: {
       cursor: 'pointer',
@@ -342,7 +342,7 @@ var styleSheet$4 = materialUi_styles.createStyleSheet('DropDownMenu', function (
       color: theme.palette.text.primary
     }
   };
-});
+};
 
 var DropDownMenuBase = function (_React$PureComponent) {
   inherits(DropDownMenuBase, _React$PureComponent);
@@ -491,9 +491,9 @@ DropDownMenuBase.defaultProps = {
   itemTemplate: undefined
 };
 
-var DropDownMenu = materialUi_styles.withStyles(styleSheet$4)(DropDownMenuBase);
+var DropDownMenu = materialUi_styles.withStyles(styles$4, { name: 'DropDownMenu' })(DropDownMenuBase);
 
-var styleSheet$3 = materialUi_styles.createStyleSheet('PageSizeSelector', function (theme) {
+var styles$3 = function styles(theme) {
   return {
     pageSizeSelector: _extends({}, theme.typography.caption, {
       float: 'right',
@@ -520,7 +520,7 @@ var styleSheet$3 = materialUi_styles.createStyleSheet('PageSizeSelector', functi
       }
     }
   };
-});
+};
 
 var PageSizeSelectorBase = function PageSizeSelectorBase(_ref) {
   var pageSize = _ref.pageSize,
@@ -563,9 +563,9 @@ PageSizeSelectorBase.defaultProps = {
   showAllText: 'All'
 };
 
-var PageSizeSelector = materialUi_styles.withStyles(styleSheet$3)(PageSizeSelectorBase);
+var PageSizeSelector = materialUi_styles.withStyles(styles$3, { name: 'PageSizeSelector' })(PageSizeSelectorBase);
 
-var styleSheet$5 = materialUi_styles.createStyleSheet('Pagination', function (theme) {
+var styles$5 = function styles(theme) {
   return {
     pagination: {
       float: 'right',
@@ -609,7 +609,7 @@ var styleSheet$5 = materialUi_styles.createStyleSheet('Pagination', function (th
       }
     }
   };
-});
+};
 
 var PageButton = function PageButton(_ref) {
   var _classNames;
@@ -627,7 +627,7 @@ var PageButton = function PageButton(_ref) {
     {
       className: buttonClasses,
       disabled: isDisabled,
-      onTouchTap: onClick
+      onClick: onClick
     },
     text
   );
@@ -747,7 +747,7 @@ var PaginationBase = function PaginationBase(_ref2) {
       {
         className: classNames(classes.arrowButton, classes.prev),
         disabled: currentPage === 0,
-        onTouchTap: function onTouchTap() {
+        onClick: function onClick() {
           return currentPage > 0 && onCurrentPageChange(currentPage - 1);
         }
       },
@@ -759,7 +759,7 @@ var PaginationBase = function PaginationBase(_ref2) {
       {
         className: classNames(classes.arrowButton, classes.next),
         disabled: currentPage === totalPages - 1 || totalCount === 0,
-        onTouchTap: function onTouchTap() {
+        onClick: function onClick() {
           return currentPage < totalPages - 1 && onCurrentPageChange(currentPage + 1);
         }
       },
@@ -777,15 +777,13 @@ PaginationBase.propTypes = {
   pageSize: PropTypes.number.isRequired
 };
 
-var Pagination = materialUi_styles.withStyles(styleSheet$5)(PaginationBase);
+var Pagination = materialUi_styles.withStyles(styles$5, { name: 'Pagination' })(PaginationBase);
 
-var styleSheet$2 = materialUi_styles.createStyleSheet('Pager', function () {
-  return {
-    pager: {
-      overflow: 'hidden'
-    }
-  };
-});
+var styles$2 = {
+  pager: {
+    overflow: 'hidden'
+  }
+};
 
 var PagerBase = function PagerBase(_ref) {
   var currentPage = _ref.currentPage,
@@ -834,7 +832,7 @@ PagerBase.defaultProps = {
   showAllText: undefined
 };
 
-var Pager = materialUi_styles.withStyles(styleSheet$2)(PagerBase);
+var Pager = materialUi_styles.withStyles(styles$2, { name: 'Pager' })(PagerBase);
 
 var PagingPanel$1 = function PagingPanel$$1(_ref) {
   var showAllText = _ref.showAllText,
@@ -855,7 +853,7 @@ PagingPanel$1.defaultProps = {
   showAllText: undefined
 };
 
-var styleSheet$6 = materialUi_styles.createStyleSheet('GroupPanel', function (theme) {
+var styles$6 = function styles(theme) {
   return {
     panel: {
       display: 'flex',
@@ -867,24 +865,58 @@ var styleSheet$6 = materialUi_styles.createStyleSheet('GroupPanel', function (th
       marginBottom: theme.spacing.unit * 1.5,
       display: 'inline-block',
       color: theme.typography.title.color
+    },
+    groupIcon: {
+      display: 'inline-block',
+      verticalAlign: 'middle'
     }
   };
-});
+};
 
 var DefaultTextBase = function DefaultTextBase(_ref) {
-  var classes = _ref.classes;
+  var classes = _ref.classes,
+      allowDragging = _ref.allowDragging,
+      allowUngroupingByClick = _ref.allowUngroupingByClick;
+
+  if (allowDragging) {
+    return React.createElement(
+      'span',
+      { className: classes.groupInfo },
+      'Drag a column header here to group by that column'
+    );
+  }
+  if (allowUngroupingByClick) {
+    return React.createElement(
+      'span',
+      { className: classes.groupInfo },
+      'Click \xA0',
+      React.createElement(
+        'span',
+        { className: classes.groupIcon },
+        React.createElement(List, null)
+      ),
+      '\xA0 icon in the column header to group by that column'
+    );
+  }
   return React.createElement(
     'span',
     { className: classes.groupInfo },
-    'Drag a column header here to group by that column'
+    'Grouping is not available'
   );
 };
 
 DefaultTextBase.propTypes = {
-  classes: PropTypes.shape().isRequired
+  classes: PropTypes.shape().isRequired,
+  allowDragging: PropTypes.bool,
+  allowUngroupingByClick: PropTypes.bool
 };
 
-var DefaultText = materialUi_styles.withStyles(styleSheet$6)(DefaultTextBase);
+DefaultTextBase.defaultProps = {
+  allowDragging: false,
+  allowUngroupingByClick: false
+};
+
+var DefaultText = materialUi_styles.withStyles(styles$6, { name: 'GroupPanel' })(DefaultTextBase);
 
 var PanelTemplateBase = function PanelTemplateBase(_ref2) {
   var classes = _ref2.classes,
@@ -901,7 +933,7 @@ PanelTemplateBase.propTypes = {
   items: PropTypes.arrayOf(PropTypes.node).isRequired
 };
 
-var PanelTemplate = materialUi_styles.withStyles(styleSheet$6)(PanelTemplateBase);
+var PanelTemplate = materialUi_styles.withStyles(styles$6, { name: 'GroupPanel' })(PanelTemplateBase);
 
 var panelTemplate = function panelTemplate(props) {
   return React.createElement(PanelTemplate, props);
@@ -911,11 +943,16 @@ var GroupPanelBase = function GroupPanelBase(_ref3) {
   var groupByColumnText = _ref3.groupByColumnText,
       classes = _ref3.classes,
       restProps = objectWithoutProperties(_ref3, ['groupByColumnText', 'classes']);
+
+  var text = groupByColumnText || React.createElement(DefaultText, {
+    allowDragging: restProps.allowDragging,
+    allowUngroupingByClick: restProps.allowUngroupingByClick
+  });
   return React.createElement(
     'div',
     { className: classes.panel },
     React.createElement(_devexpress_dxReactGrid.GroupPanelLayout, _extends({
-      groupByColumnText: groupByColumnText || React.createElement(DefaultText, null),
+      groupByColumnText: text,
       panelTemplate: panelTemplate
     }, restProps))
   );
@@ -930,9 +967,9 @@ GroupPanelBase.defaultProps = {
   groupByColumnText: undefined
 };
 
-var GroupPanel = materialUi_styles.withStyles(styleSheet$6)(GroupPanelBase);
+var GroupPanel = materialUi_styles.withStyles(styles$6, { name: 'GroupPanel' })(GroupPanelBase);
 
-var styleSheet$7 = materialUi_styles.createStyleSheet('GroupPanelItem', function (theme) {
+var styles$7 = function styles(theme) {
   return {
     button: {
       marginRight: theme.spacing.unit,
@@ -942,7 +979,7 @@ var styleSheet$7 = materialUi_styles.createStyleSheet('GroupPanelItem', function
       opacity: 0.3
     }
   };
-});
+};
 
 var label = function label(allowSorting, sortingDirection, column) {
   var title = column.title || column.name;
@@ -1010,7 +1047,7 @@ GroupPanelItemBase.defaultProps = {
   allowUngroupingByClick: false
 };
 
-var GroupPanelItem = materialUi_styles.withStyles(styleSheet$7)(GroupPanelItemBase);
+var GroupPanelItem = materialUi_styles.withStyles(styles$7, { name: 'GroupPanelItem' })(GroupPanelItemBase);
 
 var defaultCellTemplate = function defaultCellTemplate(props) {
   return React.createElement(GroupPanelItem, props);
@@ -1042,7 +1079,7 @@ GroupingPanel$1.defaultProps = {
   groupPanelItemTemplate: undefined
 };
 
-var styleSheet$8 = materialUi_styles.createStyleSheet('TableDetailToggleCell', function (theme) {
+var styles$8 = function styles(theme) {
   return {
     toggleCell: {
       textAlign: 'center',
@@ -1056,7 +1093,7 @@ var styleSheet$8 = materialUi_styles.createStyleSheet('TableDetailToggleCell', f
       marginLeft: '-6px'
     }
   };
-});
+};
 
 var TableDetailToggleCellBase = function TableDetailToggleCellBase(_ref) {
   var style = _ref.style,
@@ -1094,15 +1131,15 @@ TableDetailToggleCellBase.defaultProps = {
   toggleExpanded: function toggleExpanded() {}
 };
 
-var TableDetailToggleCell = materialUi_styles.withStyles(styleSheet$8)(TableDetailToggleCellBase);
+var TableDetailToggleCell = materialUi_styles.withStyles(styles$8, { name: 'TableDetailToggleCell' })(TableDetailToggleCellBase);
 
-var styleSheet$9 = materialUi_styles.createStyleSheet('TableDetailCell', function (theme) {
+var styles$9 = function styles(theme) {
   return {
     active: {
       backgroundColor: theme.palette.background.contentFrame
     }
   };
-});
+};
 
 var TableDetailCellBase = function TableDetailCellBase(_ref) {
   var colSpan = _ref.colSpan,
@@ -1132,7 +1169,7 @@ TableDetailCellBase.defaultProps = {
   colSpan: 1
 };
 
-var TableDetailCell = materialUi_styles.withStyles(styleSheet$9)(TableDetailCellBase);
+var TableDetailCell = materialUi_styles.withStyles(styles$9, { name: 'TableDetailCell' })(TableDetailCellBase);
 
 var detailToggleCellTemplate = function detailToggleCellTemplate(props) {
   return React.createElement(TableDetailToggleCell, props);
@@ -1149,7 +1186,7 @@ var TableRowDetail$1 = function TableRowDetail$$1(props) {
   }, props));
 };
 
-var styleSheet$10 = materialUi_styles.createStyleSheet('TableGroupCell', function (theme) {
+var styles$10 = function styles(theme) {
   return {
     cell: {
       cursor: 'pointer',
@@ -1169,7 +1206,7 @@ var styleSheet$10 = materialUi_styles.createStyleSheet('TableGroupCell', functio
       verticalAlign: 'middle'
     }
   };
-});
+};
 
 var TableGroupCellBase = function TableGroupCellBase(_ref) {
   var style = _ref.style,
@@ -1221,7 +1258,7 @@ TableGroupCellBase.defaultProps = {
   toggleGroupExpanded: function toggleGroupExpanded() {}
 };
 
-var TableGroupCell = materialUi_styles.withStyles(styleSheet$10)(TableGroupCellBase);
+var TableGroupCell = materialUi_styles.withStyles(styles$10, { name: 'TableGroupCell' })(TableGroupCellBase);
 
 var groupCellTemplate = function groupCellTemplate(props) {
   return React.createElement(TableGroupCell, props);
@@ -1234,7 +1271,7 @@ var TableGroupRow$1 = function TableGroupRow$$1(props) {
   }, props));
 };
 
-var styleSheet$11 = materialUi_styles.createStyleSheet('TableSelectAllCell', function (theme) {
+var styles$11 = function styles(theme) {
   return {
     cell: {
       overflow: 'visible',
@@ -1245,7 +1282,7 @@ var styleSheet$11 = materialUi_styles.createStyleSheet('TableSelectAllCell', fun
       cursor: 'pointer'
     }
   };
-});
+};
 
 var TableSelectAllCellBase = function TableSelectAllCellBase(_ref) {
   var _classNames;
@@ -1297,9 +1334,9 @@ TableSelectAllCellBase.defaultProps = {
   toggleAll: function toggleAll() {}
 };
 
-var TableSelectAllCell = materialUi_styles.withStyles(styleSheet$11)(TableSelectAllCellBase);
+var TableSelectAllCell = materialUi_styles.withStyles(styles$11, { name: 'TableSelectAllCell' })(TableSelectAllCellBase);
 
-var styleSheet$12 = materialUi_styles.createStyleSheet('TableSelectCell', function (theme) {
+var styles$12 = function styles(theme) {
   return {
     cell: {
       overflow: 'visible',
@@ -1307,7 +1344,7 @@ var styleSheet$12 = materialUi_styles.createStyleSheet('TableSelectCell', functi
       paddingLeft: theme.spacing.unit
     }
   };
-});
+};
 
 var TableSelectCellBase = function TableSelectCellBase(_ref) {
   var style = _ref.style,
@@ -1342,7 +1379,7 @@ TableSelectCellBase.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-var TableSelectCell = materialUi_styles.withStyles(styleSheet$12)(TableSelectCellBase);
+var TableSelectCell = materialUi_styles.withStyles(styles$12, { name: 'TableSelectCell' })(TableSelectCellBase);
 
 var selectCellTemplate = function selectCellTemplate(props) {
   return React.createElement(TableSelectCell, props);
@@ -1443,7 +1480,7 @@ Table$1.propTypes = {
   setColumnOrder: PropTypes.func.isRequired
 };
 
-var styleSheet$13 = materialUi_styles.createStyleSheet('TableCell', function (theme) {
+var styles$13 = function styles(theme) {
   return {
     cell: {
       paddingRight: theme.spacing.unit,
@@ -1455,7 +1492,7 @@ var styleSheet$13 = materialUi_styles.createStyleSheet('TableCell', function (th
       textAlign: 'right'
     }
   };
-});
+};
 
 var TableCellBase = function TableCellBase(_ref) {
   var _classNames;
@@ -1487,15 +1524,13 @@ TableCellBase.defaultProps = {
   column: {}
 };
 
-var TableCell$1 = materialUi_styles.withStyles(styleSheet$13)(TableCellBase);
+var TableCell$1 = materialUi_styles.withStyles(styles$13, { name: 'TableCell' })(TableCellBase);
 
-var styleSheet$14 = materialUi_styles.createStyleSheet('TableStubCell', function () {
-  return {
-    cell: {
-      padding: 0
-    }
-  };
-});
+var styles$14 = {
+  cell: {
+    padding: 0
+  }
+};
 
 var TableStubCellBase = function TableStubCellBase(_ref) {
   var style = _ref.style,
@@ -1515,16 +1550,16 @@ TableStubCellBase.defaultProps = {
   style: {}
 };
 
-var TableStubCell = materialUi_styles.withStyles(styleSheet$14)(TableStubCellBase);
+var TableStubCell = materialUi_styles.withStyles(styles$14, { name: 'TableStubCell' })(TableStubCellBase);
 
-var styleSheet$15 = materialUi_styles.createStyleSheet('TableNoDataCell', function (theme) {
+var styles$15 = function styles(theme) {
   return {
     cell: {
       textAlign: 'center',
       padding: theme.spacing.unit * 5 + 'px 0'
     }
   };
-});
+};
 
 var TableNoDataCellBase = function TableNoDataCellBase(_ref) {
   var style = _ref.style,
@@ -1556,7 +1591,7 @@ TableNoDataCellBase.defaultProps = {
   colSpan: 1
 };
 
-var TableNoDataCell = materialUi_styles.withStyles(styleSheet$15)(TableNoDataCellBase);
+var TableNoDataCell = materialUi_styles.withStyles(styles$15, { name: 'TableNoDataCell' })(TableNoDataCellBase);
 
 var tableTemplate = function tableTemplate(props) {
   return React.createElement(Table$1, props);
@@ -1589,7 +1624,7 @@ TableView$1.defaultProps = {
   tableCellTemplate: undefined
 };
 
-var styleSheet$16 = materialUi_styles.createStyleSheet('TableFilterCell', function (theme) {
+var styles$16 = function styles(theme) {
   return {
     cell: {
       verticalAlign: 'top',
@@ -1603,7 +1638,7 @@ var styleSheet$16 = materialUi_styles.createStyleSheet('TableFilterCell', functi
       width: '100%'
     }
   };
-});
+};
 
 var TableFilterCellBase = function TableFilterCellBase(_ref) {
   var style = _ref.style,
@@ -1640,7 +1675,7 @@ TableFilterCellBase.defaultProps = {
   setFilter: function setFilter() {}
 };
 
-var TableFilterCell = materialUi_styles.withStyles(styleSheet$16)(TableFilterCellBase);
+var TableFilterCell = materialUi_styles.withStyles(styles$16, { name: 'TableFilterCell' })(TableFilterCellBase);
 
 var defaultFilterCellTemplate = function defaultFilterCellTemplate(props) {
   return React.createElement(TableFilterCell, props);
@@ -1661,7 +1696,7 @@ TableFilterRow$1.defaultProps = {
   filterCellTemplate: undefined
 };
 
-var styleSheet$17 = materialUi_styles.createStyleSheet('TableHeaderCell', function (theme) {
+var styles$17 = function styles(theme) {
   return {
     groupingControl: {
       cursor: 'pointer',
@@ -1736,7 +1771,7 @@ var styleSheet$17 = materialUi_styles.createStyleSheet('TableHeaderCell', functi
       marginRight: theme.spacing.unit * 2 - 2
     }
   };
-});
+};
 
 var TableHeaderCellBase = function (_React$PureComponent) {
   inherits(TableHeaderCellBase, _React$PureComponent);
@@ -1900,7 +1935,7 @@ TableHeaderCellBase.defaultProps = {
   dragPayload: null
 };
 
-var TableHeaderCell = materialUi_styles.withStyles(styleSheet$17)(TableHeaderCellBase);
+var TableHeaderCell = materialUi_styles.withStyles(styles$17, { name: 'TableHeaderCell' })(TableHeaderCellBase);
 
 var headerCellTemplate = function headerCellTemplate(props) {
   return React.createElement(TableHeaderCell, props);
@@ -1912,7 +1947,7 @@ var TableHeaderRow$1 = function TableHeaderRow$$1(props) {
   }, props));
 };
 
-var styleSheet$18 = materialUi_styles.createStyleSheet('EditColumn', function (theme) {
+var styles$18 = function styles(theme) {
   return {
     button: {
       padding: theme.spacing.unit,
@@ -1931,9 +1966,9 @@ var styleSheet$18 = materialUi_styles.createStyleSheet('EditColumn', function (t
       paddingRight: 0
     }
   };
-});
+};
 
-var withEditColumnStyles = materialUi_styles.withStyles(styleSheet$18);
+var withEditColumnStyles = materialUi_styles.withStyles(styles$18, { name: 'EditColumn' });
 
 var CommandButtonBase = function CommandButtonBase(_ref) {
   var executeCommand = _ref.executeCommand,
@@ -2125,7 +2160,7 @@ TableEditColumn$1.defaultProps = {
   commandTemplate: undefined
 };
 
-var styleSheet$19 = materialUi_styles.createStyleSheet('EditCell', function (theme) {
+var styles$19 = function styles(theme) {
   return {
     cell: {
       verticalAlign: 'top',
@@ -2142,7 +2177,7 @@ var styleSheet$19 = materialUi_styles.createStyleSheet('EditCell', function (the
       textAlign: 'right'
     }
   };
-});
+};
 
 var EditCellBase = function EditCellBase(_ref) {
   var column = _ref.column,
@@ -2182,7 +2217,7 @@ EditCellBase.defaultProps = {
   style: {}
 };
 
-var EditCell = materialUi_styles.withStyles(styleSheet$19)(EditCellBase);
+var EditCell = materialUi_styles.withStyles(styles$19, { name: 'EditCell' })(EditCellBase);
 
 var defaultEditCellTemplate = function defaultEditCellTemplate(props) {
   return React.createElement(EditCell, props);
